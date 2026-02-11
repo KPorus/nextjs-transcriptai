@@ -21,10 +21,10 @@ A modern video transcription application built with Next.js 14, powered by Googl
 - **AI Provider**: Google Gemini AI
 - **Icons**: Lucide React
 
-## 📋 Prerequisites
+<!-- ## 📋 Prerequisites
 
 - Node.js 18+ installed
-- A Google Gemini API key ([Get one here](https://aistudio.google.com/app/apikey))
+- A Google Gemini API key ([Get one here](https://aistudio.google.com/app/apikey)) -->
 
 <!-- ## 🔧 Installation
 
