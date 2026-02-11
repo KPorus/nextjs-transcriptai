@@ -1,6 +1,6 @@
 # TranscriptAI - Next.js Version
 
-A modern video transcription application built with Next.js 14, powered by Google's Gemini AI. Upload videos in any language and get accurate English transcripts with timestamps.
+A modern video transcription application built with Next.js 14. Upload videos in any language and get accurate English transcripts with timestamps.
 
 ## 🚀 Features
 
