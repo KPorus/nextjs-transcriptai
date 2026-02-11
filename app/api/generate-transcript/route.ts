@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { TranscriptSegment } from "@/types";
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 const parseTranscript = (text: string): TranscriptSegment[] => {
   const lines = text.split("\n");
@@ -114,8 +116,8 @@ Rules:
   }
 }
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
