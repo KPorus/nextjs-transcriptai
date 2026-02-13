@@ -31,6 +31,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-.next
-.qodo
 QUICKSTART.md
+R2_SETUP.md

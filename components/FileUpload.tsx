@@ -5,7 +5,7 @@ import { UploadCloud, Youtube, AlertCircle } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setVideoFile, setError, setActiveTab, setYoutubeUrl } from '@/store/transcriptSlice';
 
-const MAX_SIZE_MB = 100;
+const MAX_SIZE_MB = 1000;
 const ALLOWED_TYPES = ['video/mp4', 'video/webm', 'video/quicktime', 'audio/mpeg', 'audio/wav'];
 
 const FileUpload: React.FC = () => {
@@ -74,7 +74,7 @@ const FileUpload: React.FC = () => {
         >
           Upload Video
         </button>
-        <button
+        {/* <button
           onClick={() => dispatch(setActiveTab('youtube'))}
           className={`pb-2 text-sm font-semibold transition-all border-b-2 ${
             activeTab === 'youtube' 
@@ -83,7 +83,7 @@ const FileUpload: React.FC = () => {
           }`}
         >
           YouTube Link
-        </button>
+        </button> */}
       </div>
 
       <div className="rounded-2xl p-1 bg-white shadow-xl">

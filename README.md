@@ -4,13 +4,15 @@ A modern video transcription application built with Next.js 14. Upload videos in
 
 ## 🚀 Features
 
-- **Video Upload**: Drag & drop or browse to upload video files (MP4, WebM, MOV) or audio files (MP3, WAV)
+- **Video Upload to Cloud Storage**: Direct upload to Cloudflare R2 bucket
+- **Automatic Cleanup**: Videos are automatically deleted after processing
 - **AI-Powered Transcription**: Uses Google's Gemini AI to transcribe and translate videos
 - **Timestamp Generation**: Automatic timestamp generation for easy navigation
 - **Editable Transcripts**: Edit transcript segments in real-time
 - **Export Options**: Copy to clipboard or download as text file
 - **Modern UI**: Beautiful, responsive interface built with Tailwind CSS
 - **State Management**: Redux Toolkit for predictable state management
+- **Secure Processing**: Videos temporarily stored in R2, never on your server
 
 ## 🛠️ Tech Stack
 
@@ -19,12 +21,14 @@ A modern video transcription application built with Next.js 14. Upload videos in
 - **Styling**: Tailwind CSS
 - **State Management**: Redux Toolkit
 - **AI Provider**: Google Gemini AI
+- **Storage**: Cloudflare R2 (S3-compatible)
 - **Icons**: Lucide React
 
 <!-- ## 📋 Prerequisites
 
 - Node.js 18+ installed
-- A Google Gemini API key ([Get one here](https://aistudio.google.com/app/apikey)) -->
+- A Google Gemini API key ([Get one here](https://aistudio.google.com/app/apikey))
+- A Cloudflare account with R2 enabled ([Setup guide](./R2_SETUP.md)) -->
 
 <!-- ## 🔧 Installation
 
@@ -45,10 +49,17 @@ npm install
 Create a `.env.local` file in the root directory:
 
 ```env
+# Gemini API Key
 GEMINI_API_KEY=your_gemini_api_key_here
+
+# Cloudflare R2 Configuration
+R2_ACCOUNT_ID=your_r2_account_id_here
+R2_ACCESS_KEY_ID=your_r2_access_key_id_here
+R2_SECRET_ACCESS_KEY=your_r2_secret_access_key_here
+R2_BUCKET_NAME=transcriptai-videos
 ```
 
-Replace `your_gemini_api_key_here` with your actual Gemini API key.
+**See [R2_SETUP.md](./R2_SETUP.md) for detailed R2 configuration instructions.**
 
 4. **Run the development server**
 

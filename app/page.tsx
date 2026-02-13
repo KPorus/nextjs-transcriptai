@@ -18,22 +18,68 @@ export default function HomePage() {
         try {
           dispatch(setStatus('processing'));
 
-          const formData = new FormData();
-          formData.append('file', videoFile);
-
-          const response = await fetch('/api/generate-transcript', {
+          console.log('Step 1: Getting presigned upload URL...');
+          
+          // Step 1: Get presigned URL for upload
+          const urlResponse = await fetch('/api/upload-url', {
             method: 'POST',
-            body: formData,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              filename: videoFile.name,
+              contentType: videoFile.type,
+            }),
           });
 
-          if (!response.ok) {
-            const errorData = await response.json();
+          if (!urlResponse.ok) {
+            const errorData = await urlResponse.json();
+            throw new Error(errorData.error || 'Failed to get upload URL');
+          }
+
+          const { uploadUrl, key } = await urlResponse.json();
+          console.log('Got presigned URL, key:', key);
+
+          // Step 2: Upload file directly to R2
+          console.log('Step 2: Uploading to R2...');
+          const uploadResponse = await fetch(uploadUrl, {
+            method: 'PUT',
+            body: videoFile,
+            headers: {
+              'Content-Type': videoFile.type,
+            },
+          });
+
+          if (!uploadResponse.ok) {
+            throw new Error('Failed to upload to R2');
+          }
+
+          console.log('Upload successful!');
+
+          // Step 3: Process transcript from R2
+          console.log('Step 3: Generating transcript...');
+          const transcriptResponse = await fetch('/api/generate-transcript', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              r2Key: key,
+              contentType: videoFile.type,
+            }),
+          });
+
+          if (!transcriptResponse.ok) {
+            const errorData = await transcriptResponse.json();
             throw new Error(errorData.error || 'Failed to generate transcript');
           }
 
-          const result = await response.json();
+          const result = await transcriptResponse.json();
+          console.log('Transcript generated successfully!');
+          
           dispatch(setTranscriptData(result));
         } catch (err: any) {
+          console.error('Processing error:', err);
           dispatch(setError(err.message || 'An unknown error occurred'));
         }
       }
